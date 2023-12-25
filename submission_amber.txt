@@ -1,0 +1,14 @@
+1.Ans:
+SELECT e.name AS employee_name, COALESCE(d.name, 'Unassigned') AS department_name FROM employee e LEFT JOIN department d ON e.department_id = d.id; 
+
+2.Ans:
+SELECT d.name AS department_name, COUNT(e.id) AS employee_count FROM employee e JOIN department d ON e.department_id = d.id GROUP BY d.name; 
+
+3.Ans:
+SELECT d.name AS department_name, AVG(s.salary) AS average_salary FROM employee e JOIN department d ON e.department_id = d.id JOIN salary s ON e.id = s.employee_id GROUP BY d.name HAVING AVG(s.salary) > 5500.00; 
+
+4.Ans:
+SELECT e.name AS employee_name, e.hire_date FROM employee e WHERE e.hire_date > '2022-03-01'; 
+
+5.Ans:
+SELECT e.name AS employee_name, s.salary, s.effective_date, AVG(s.salary) OVER (PARTITION BY e.id) AS average_salary, s.salary - AVG(s.salary) OVER (PARTITION BY e.id) AS salary_difference FROM employee e JOIN salary s ON e.id = s.employee_id; 
